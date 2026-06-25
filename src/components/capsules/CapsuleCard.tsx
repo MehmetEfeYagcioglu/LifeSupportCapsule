@@ -31,7 +31,7 @@ export function CapsuleCard({
               {title}
             </h2>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-3 text-slate-100">
+          <div className="shrink-0 self-start rounded-2xl border border-white/10 bg-white/5 p-2.5 text-white">
             {icon}
           </div>
         </div>

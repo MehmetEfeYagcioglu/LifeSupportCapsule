@@ -1,0 +1,24 @@
+{
+  "lifeSupport": {
+    "gas": {
+      "value": 33
+    },
+    "soil": {
+      "moisture": 11
+    },
+    "temperature": {
+      "value": 99
+    },
+    "humidity": {
+      "value": 51
+    },
+    "rain": {
+      "level": 23
+    },
+    "light": {
+      "level": 69
+    },
+    "systemStatus": "ONLINE",
+    "updatedAt": 1750000000000
+  }
+}

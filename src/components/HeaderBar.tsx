@@ -37,16 +37,19 @@ export function HeaderBar({
       <div className="relative flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
         <div className="max-w-3xl space-y-3">
           <div className="inline-flex items-center rounded-full border border-orange-400/20 bg-orange-400/8 px-3 py-1 text-[10px] uppercase tracking-[0.4em] text-orange-200">
-            Mars Yasam Destek Paneli
+            Takim Zumruduanka
           </div>
 
           <div>
             <h1 className="text-2xl font-bold tracking-[0.12em] text-white drop-shadow-[0_0_18px_rgba(56,189,248,0.35)] sm:text-3xl xl:text-4xl">
-              YASAM DESTEK SISTEMI
+              ZUMRUDUANKA
             </h1>
+            <p className="mt-2 text-lg font-medium tracking-[0.18em] text-sky-100">
+              EPNI LIFE SUPPORT DASHBOARD
+            </p>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300 sm:text-base">
-              Mars kapsulundeki hava, su ve toprak verilerini anlik olarak
-              izleyen kontrol paneli.
+              Gaz, toprak nemi, sicaklik ve yagmur verilerini anlik izleyen
+              takim kontrol paneli.
             </p>
           </div>
         </div>
@@ -65,7 +68,9 @@ export function HeaderBar({
               </span>
             </div>
             <p className="mt-3 text-xs text-slate-400">
-              {isUsingMockData ? "Veri Kaynagi: Ornek Veri" : "Veri Kaynagi: Firebase"}
+              {isUsingMockData
+                ? "Veri Kaynagi: Ornek Veri"
+                : "Veri Kaynagi: Firebase"}
             </p>
           </div>
         </div>

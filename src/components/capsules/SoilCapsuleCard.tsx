@@ -14,15 +14,18 @@ function SoilIcon() {
       stroke="currentColor"
       strokeWidth="1.8"
     >
-      <path d="M12 21V11" />
-      <path d="M12 11c0-3.8 2.3-6.3 6.5-7-1 4.6-3.3 7-6.5 7Z" />
-      <path d="M12 15c0-3.1-1.9-5.1-5.8-5.8.8 3.8 2.8 5.8 5.8 5.8Z" />
+      <path d="M12 20v-6" />
+      <path d="M9 20h6" />
+      <path d="M8.5 13.5c0-2.7 1.5-4.5 3.5-5.5 2 1 3.5 2.8 3.5 5.5" />
+      <path d="M6.5 10.5c1.7.1 2.9.8 3.8 2.2" />
+      <path d="M17.5 10.5c-1.7.1-2.9.8-3.8 2.2" />
     </svg>
   );
 }
 
 export function SoilCapsuleCard({ moisture }: SoilCapsuleCardProps) {
-  const safeMoisture = Math.max(0, Math.min(100, moisture));
+  const hasValue = Number.isFinite(moisture);
+  const displayMoisture = hasValue ? moisture : "-";
 
   return (
     <CapsuleCard
@@ -38,32 +41,19 @@ export function SoilCapsuleCard({ moisture }: SoilCapsuleCardProps) {
             Toprak Nemi
           </p>
           <p className="mt-3 text-5xl font-bold text-white sm:text-6xl">
-            {safeMoisture}
-            <span className="ml-2 text-2xl font-medium text-emerald-200/85">
-              %
-            </span>
+            {displayMoisture}
+            {hasValue ? (
+              <span className="text-2xl font-medium text-emerald-200/85">%</span>
+            ) : null}
           </p>
         </div>
 
         <div className="rounded-[28px] border border-emerald-300/15 bg-slate-950/55 p-6">
-          <div className="flex items-end gap-5">
-            <div className="relative flex h-40 flex-1 items-end gap-3">
-              {[0.4, 0.58, 0.82].map((ratio, index) => (
-                <div key={index} className="flex flex-1 items-end justify-center">
-                  <div
-                    className="w-full rounded-t-[18px] border border-emerald-300/20 bg-[linear-gradient(180deg,rgba(16,185,129,0.85),rgba(6,95,70,0.72))] shadow-[0_0_16px_rgba(52,211,153,0.24)]"
-                    style={{ height: `${Math.max(24, safeMoisture * ratio)}%` }}
-                  />
-                </div>
-              ))}
-            </div>
-            <div className="flex h-40 w-28 flex-col items-center justify-center rounded-[24px] border border-emerald-300/15 bg-emerald-400/5">
-              <div className="mb-3 rounded-full border border-emerald-300/20 bg-emerald-300/10 p-3">
+          <div className="flex items-end">
+            <div className="flex h-40 w-40 items-center justify-center rounded-xl border border-emerald-300/15 bg-emerald-400/5">
+              <div className="rounded-full border border-emerald-300/20 bg-emerald-300/10 p-4 shadow-[0_0_20px_rgba(52,211,153,0.18)]">
                 <SoilIcon />
               </div>
-              <span className="text-xs uppercase tracking-[0.28em] text-slate-400">
-                NEM
-              </span>
             </div>
           </div>
         </div>

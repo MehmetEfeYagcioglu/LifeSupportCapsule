@@ -9,35 +9,46 @@ import {
 import type { LifeSupportData } from "../types/lifeSupport";
 
 type UseLifeSupportDataResult = {
-  data: LifeSupportData;
+  data: LifeSupportData | null;
   isUsingMockData: boolean;
+  isLoading: boolean;
   errorMessage: string | null;
 };
 
 export function useLifeSupportData(): UseLifeSupportDataResult {
-  const [data, setData] = useState<LifeSupportData>(mockLifeSupportData);
+  const [data, setData] = useState<LifeSupportData | null>(
+    isFirebaseConfigured ? null : mockLifeSupportData,
+  );
   const [isUsingMockData, setIsUsingMockData] = useState(!isFirebaseConfigured);
+  const [isLoading, setIsLoading] = useState(isFirebaseConfigured);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     if (!realtimeDatabase) {
       setData(getMockLifeSupportData());
       setIsUsingMockData(true);
+      setIsLoading(false);
       setErrorMessage(null);
       return;
     }
 
     const unsubscribe = subscribeToLifeSupportData(
       realtimeDatabase,
-      (nextData) => {
+      (nextData, isLiveData) => {
         setData(nextData);
-        setIsUsingMockData(false);
-        setErrorMessage(null);
+        setIsUsingMockData(!isLiveData);
+        setIsLoading(false);
+        setErrorMessage(
+          isLiveData
+            ? null
+            : "Firebase verisi bulunamadi, ornek veriler gosteriliyor.",
+        );
       },
       () => {
         setData(getMockLifeSupportData());
         setIsUsingMockData(true);
-        setErrorMessage("Firebase unavailable, displaying mock telemetry.");
+        setIsLoading(false);
+        setErrorMessage("Firebase baglantisi kurulamadi, ornek veriler gosteriliyor.");
       },
     );
 
@@ -47,6 +58,7 @@ export function useLifeSupportData(): UseLifeSupportDataResult {
   return {
     data,
     isUsingMockData,
+    isLoading,
     errorMessage,
   };
 }
