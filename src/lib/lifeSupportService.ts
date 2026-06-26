@@ -1,10 +1,4 @@
-import {
-  onValue,
-  ref,
-  type Database,
-  type DataSnapshot,
-  type Unsubscribe,
-} from "firebase/database";
+import { onValue, ref, type Database, type Unsubscribe } from "firebase/database";
 
 import { mockLifeSupportData } from "../data/mockLifeSupportData";
 import type { LifeSupportData, SystemStatus } from "../types/lifeSupport";
@@ -86,6 +80,33 @@ function pickFirstNumericValue(
   return fallback;
 }
 
+function normalizeGasPercentage(
+  source: Partial<LifeSupportData>,
+  fallback: number,
+) {
+  const explicitPercentage = pickFirstNumericValue(
+    source,
+    [
+      ["gas", "percentage"],
+      ["gas", "percent"],
+      ["gas", "level"],
+    ],
+    Number.NaN,
+  );
+
+  if (Number.isFinite(explicitPercentage)) {
+    return clampPercentage(explicitPercentage);
+  }
+
+  const rawValue = normalizeOptionalNumber(source.gas?.value);
+
+  if (rawValue === undefined) {
+    return fallback;
+  }
+
+  return clampPercentage((rawValue / 4095) * 100);
+}
+
 function normalizeLifeSupportPayload(
   payload: unknown,
   useMockFallbacks = true,
@@ -99,6 +120,12 @@ function normalizeLifeSupportPayload(
       value: normalizeNumber(
         source.gas?.value,
         useMockFallbacks ? mockLifeSupportData.gas.value : missingValue,
+      ),
+      percentage: normalizeGasPercentage(
+        source,
+        useMockFallbacks
+          ? (mockLifeSupportData.gas.percentage ?? missingValue)
+          : missingValue,
       ),
     },
     soil: {
@@ -136,13 +163,8 @@ function normalizeLifeSupportPayload(
         pickFirstNumericValue(
           source,
           [
-            ["light"],
             ["light", "level"],
             ["light", "value"],
-            ["ldr"],
-            ["ldr", "light"],
-            ["ldr", "level"],
-            ["ldr", "value"],
             ["isik"],
             ["isik", "level"],
             ["isik", "value"],
@@ -158,39 +180,17 @@ function normalizeLifeSupportPayload(
   };
 }
 
-function hasUsableLifeSupportData(snapshot: DataSnapshot) {
-  const value = snapshot.val();
-
-  return value !== null && typeof value === "object";
-}
-
-function extractLifeSupportSource(snapshotValue: unknown) {
-  if (!snapshotValue || typeof snapshotValue !== "object") {
-    return mockLifeSupportData;
-  }
-
-  const record = snapshotValue as Record<string, unknown>;
-  const nestedLifeSupport = record[LIFE_SUPPORT_ROOT];
-
-  if (nestedLifeSupport && typeof nestedLifeSupport === "object") {
-    return nestedLifeSupport;
-  }
-
-  return snapshotValue;
-}
-
 export function subscribeToLifeSupportData(
   database: Database,
   onData: (data: LifeSupportData, isLiveData: boolean) => void,
   onError?: (error: Error) => void,
 ): Unsubscribe {
-  const rootRef = ref(database, "/");
+  const lifeSupportRef = ref(database, LIFE_SUPPORT_ROOT);
 
   return onValue(
-    rootRef,
+    lifeSupportRef,
     (snapshot) => {
-      const rawValue = snapshot.val();
-      const payload = extractLifeSupportSource(rawValue);
+      const payload = snapshot.val();
       const isLiveData =
         payload !== mockLifeSupportData &&
         payload !== null &&

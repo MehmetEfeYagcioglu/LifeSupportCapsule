@@ -43,7 +43,7 @@ export function TemperatureCapsuleCard({
         <div className="mx-auto flex justify-center">
           <div className="relative h-64 w-20 rounded-full border border-orange-300/25 bg-slate-950/70 p-3 shadow-[inset_0_0_40px_rgba(249,115,22,0.12)]">
             <div className="absolute bottom-3 left-1/2 h-10 w-10 -translate-x-1/2 rounded-full bg-orange-500/80 shadow-[0_0_20px_rgba(249,115,22,0.45)]" />
-            <div className="absolute inset-x-1/2 bottom-8 w-4 -translate-x-1/2 overflow-hidden rounded-full bg-slate-800">
+            <div className="absolute bottom-8 left-1/2 h-44 w-4 -translate-x-1/2 overflow-hidden rounded-full bg-slate-800">
               <div
                 className="absolute bottom-0 left-0 right-0 rounded-full bg-[linear-gradient(180deg,rgba(253,186,116,0.95),rgba(234,88,12,0.9))]"
                 style={{ height: `${barHeight}%` }}

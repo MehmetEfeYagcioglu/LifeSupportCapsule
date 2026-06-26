@@ -31,14 +31,14 @@ export function RainCapsuleCard({ level }: RainCapsuleCardProps) {
     <CapsuleCard
       accentClassName="bg-sky-400/20"
       icon={<RainIcon />}
-      subtitle="Yagmur Sensoru"
-      title="YAGMUR"
+      subtitle="Yağmur Sensörü"
+      title="YAĞMUR"
       footerLabel="Yagis Durumu: Izleniyor"
     >
       <div className="space-y-8">
         <div>
           <p className="text-sm uppercase tracking-[0.32em] text-sky-200/70">
-            Yagmur Seviyesi
+            Yağmur Seviyesi
           </p>
           <p className="mt-3 text-5xl font-bold text-white sm:text-6xl">
             {displayLevel}
@@ -60,7 +60,7 @@ export function RainCapsuleCard({ level }: RainCapsuleCardProps) {
             </div>
             <div className="flex items-center justify-between text-xs uppercase tracking-[0.28em] text-slate-400">
               <span>Kuru</span>
-              <span>Yagisli</span>
+              <span>Yağışlı</span>
             </div>
           </div>
         </div>

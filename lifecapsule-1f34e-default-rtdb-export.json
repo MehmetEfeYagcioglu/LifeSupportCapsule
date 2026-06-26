@@ -6,8 +6,8 @@
     "humidity": {
       "value": 43
     },
-    "ldr": {
-      "light": 53
+    "light": {
+      "level": 53
     },
     "rain": {
       "level": 0

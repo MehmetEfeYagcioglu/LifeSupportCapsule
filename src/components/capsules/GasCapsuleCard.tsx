@@ -2,6 +2,7 @@ import { CapsuleCard } from "./CapsuleCard";
 
 type GasCapsuleCardProps = {
   value: number;
+  percentage?: number;
 };
 
 function GasIcon() {
@@ -22,10 +23,13 @@ function GasIcon() {
   );
 }
 
-export function GasCapsuleCard({ value }: GasCapsuleCardProps) {
+export function GasCapsuleCard({ value, percentage }: GasCapsuleCardProps) {
   const hasValue = Number.isFinite(value);
   const displayValue = hasValue ? Math.max(0, value) : "-";
-  const gaugeValue = hasValue ? Math.max(0, Math.min(100, value)) : 0;
+  const hasPercentage = Number.isFinite(percentage);
+  const gaugeValue = hasPercentage
+    ? Math.max(0, Math.min(100, percentage ?? 0))
+    : 0;
   const radius = 62;
   const circumference = 2 * Math.PI * radius;
   const strokeOffset = circumference - (gaugeValue / 100) * circumference;
@@ -34,7 +38,7 @@ export function GasCapsuleCard({ value }: GasCapsuleCardProps) {
     <CapsuleCard
       accentClassName="bg-cyan-400/25"
       icon={<GasIcon />}
-      subtitle="Gaz Sensoru"
+      subtitle="Gaz Sensörü"
       title="GAZ"
       footerLabel="Gaz Durumu: Izleniyor"
     >
@@ -42,7 +46,7 @@ export function GasCapsuleCard({ value }: GasCapsuleCardProps) {
         <div className="space-y-8">
           <div>
             <p className="text-sm uppercase tracking-[0.32em] text-cyan-200/70">
-              Gaz Degeri
+              Gaz Değeri
             </p>
             <p className="mt-3 text-5xl font-bold text-white sm:text-6xl">
               {displayValue}
@@ -80,7 +84,7 @@ export function GasCapsuleCard({ value }: GasCapsuleCardProps) {
             </svg>
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               <span className="text-3xl font-semibold text-cyan-100">
-                {gaugeValue}%
+                {hasPercentage ? `${Math.round(gaugeValue)}%` : "-"}
               </span>
             </div>
           </div>

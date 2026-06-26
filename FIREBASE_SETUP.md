@@ -1,6 +1,6 @@
 # Firebase Realtime Database Kurulumu
 
-Bu proje veriyi `lifeSupport` yolu altindan okur.
+Bu proje veriyi sadece `lifeSupport` yolu altindan okur.
 
 ## Beklenen veri yapisi
 
@@ -32,10 +32,10 @@ Gelistirme asamasinda test icin:
 }
 ```
 
-Daha guvenli kullanim icin ileride kurallari daraltin.
-
-## Onemli not
+## Onemli notlar
 
 - Uygulama `lifeSupport` yolunda veri bulamazsa otomatik olarak ornek veriye doner.
 - Firebase ayarlari `.env.local` dosyasindan okunur.
 - Arduino tarafinin JSON veriyi `.../lifeSupport.json` adresine yazmasi gerekir.
+- Isik verisi `ldr.light` olarak degil, `light.level` olarak gonderilmelidir.
+- `updatedAt` icin ideal olan deger `millis()` degil, gercek bir zaman damgasidir.

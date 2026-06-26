@@ -3,6 +3,7 @@ import type { LifeSupportData } from "../types/lifeSupport";
 export const mockLifeSupportData: LifeSupportData = {
   gas: {
     value: 312,
+    percentage: 8,
   },
   soil: {
     moisture: 58,

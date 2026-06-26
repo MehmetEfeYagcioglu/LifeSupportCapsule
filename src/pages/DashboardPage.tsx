@@ -8,7 +8,7 @@ import { TemperatureCapsuleCard } from "../components/capsules/TemperatureCapsul
 import { useLifeSupportData } from "../hooks/useLifeSupportData";
 
 export function DashboardPage() {
-  const { data, errorMessage, isUsingMockData, isLoading } = useLifeSupportData();
+  const { data, isUsingMockData, isLoading } = useLifeSupportData();
   const systemStatus = data?.systemStatus ?? "ONLINE";
 
   return (
@@ -18,15 +18,12 @@ export function DashboardPage() {
         isUsingMockData={isUsingMockData}
       />
 
-      <div className="mt-6 rounded-2xl border border-white/10 bg-slate-900/35 px-4 py-3 text-sm text-slate-300 backdrop-blur-md">
-        {isLoading
-          ? "Firebase verileri yukleniyor..."
-          : errorMessage ?? "Kapsul verileri senkronize edildi."}
-      </div>
-
       {data ? (
-        <section className="mt-8 grid flex-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
-          <GasCapsuleCard value={data.gas.value} />
+        <section className="mt-8 grid flex-1 auto-rows-fr gap-8 md:grid-cols-2 xl:grid-cols-3">
+          <GasCapsuleCard
+            value={data.gas.value}
+            percentage={data.gas.percentage}
+          />
           <SoilCapsuleCard moisture={data.soil.moisture} />
           <TemperatureCapsuleCard value={data.temperature.value} />
           <HumidityCapsuleCard value={data.humidity.value} />
@@ -34,11 +31,11 @@ export function DashboardPage() {
           <LightCapsuleCard level={data.light.level} />
         </section>
       ) : (
-        <section className="mt-8 grid flex-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+        <section className="mt-8 grid flex-1 auto-rows-fr gap-8 md:grid-cols-2 xl:grid-cols-3">
           {Array.from({ length: 6 }).map((_, index) => (
             <div
               key={index}
-              className="h-[360px] rounded-[30px] border border-white/10 bg-slate-900/30 backdrop-blur-xl"
+              className="h-full min-h-[360px] rounded-[30px] border border-white/10 bg-slate-900/30 backdrop-blur-xl"
             />
           ))}
         </section>

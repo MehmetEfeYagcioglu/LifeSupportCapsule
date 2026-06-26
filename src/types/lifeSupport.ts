@@ -1,5 +1,6 @@
 export type GasMetrics = {
   value: number;
+  percentage?: number;
 };
 
 export type SoilMetrics = {

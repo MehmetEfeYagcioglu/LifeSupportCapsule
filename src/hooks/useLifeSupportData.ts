@@ -38,17 +38,13 @@ export function useLifeSupportData(): UseLifeSupportDataResult {
         setData(nextData);
         setIsUsingMockData(!isLiveData);
         setIsLoading(false);
-        setErrorMessage(
-          isLiveData
-            ? null
-            : "Firebase verisi bulunamadi, ornek veriler gosteriliyor.",
-        );
+        setErrorMessage(null);
       },
       () => {
         setData(getMockLifeSupportData());
         setIsUsingMockData(true);
         setIsLoading(false);
-        setErrorMessage("Firebase baglantisi kurulamadi, ornek veriler gosteriliyor.");
+        setErrorMessage(null);
       },
     );
 

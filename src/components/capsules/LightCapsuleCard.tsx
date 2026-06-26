@@ -37,13 +37,13 @@ export function LightCapsuleCard({ level }: LightCapsuleCardProps) {
       accentClassName="bg-amber-400/20"
       icon={<LightIcon />}
       subtitle="LDR Isik Sensoru"
-      title="ISIK"
+      title="IŞIK"
       footerLabel="Isik Durumu: Izleniyor"
     >
       <div className="space-y-8">
         <div>
           <p className="text-sm uppercase tracking-[0.32em] text-amber-200/70">
-            Isik Seviyesi
+            Işık Seviyesi
           </p>
           <p className="mt-3 text-5xl font-bold text-white sm:text-6xl">
             {displayLevel}

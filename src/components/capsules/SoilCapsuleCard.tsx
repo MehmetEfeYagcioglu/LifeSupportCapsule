@@ -31,7 +31,7 @@ export function SoilCapsuleCard({ moisture }: SoilCapsuleCardProps) {
     <CapsuleCard
       accentClassName="bg-emerald-400/20"
       icon={<SoilIcon />}
-      subtitle="Toprak Kapsulu"
+      subtitle="Toprak Nem Sensörü"
       title="TOPRAK"
       footerLabel="Biyom: Verimli"
     >
@@ -49,8 +49,8 @@ export function SoilCapsuleCard({ moisture }: SoilCapsuleCardProps) {
         </div>
 
         <div className="rounded-[28px] border border-emerald-300/15 bg-slate-950/55 p-6">
-          <div className="flex items-end">
-            <div className="flex h-40 w-40 items-center justify-center rounded-xl border border-emerald-300/15 bg-emerald-400/5">
+          <div className="flex items-center justify-center">
+            <div className="flex h-40 w-[220px] items-center justify-center rounded-xl border border-emerald-300/15 bg-emerald-400/5">
               <div className="rounded-full border border-emerald-300/20 bg-emerald-300/10 p-4 shadow-[0_0_20px_rgba(52,211,153,0.18)]">
                 <SoilIcon />
               </div>

@@ -14,10 +14,9 @@ export function CapsuleCard({
   icon,
   subtitle,
   title,
-  footerLabel,
 }: CapsuleCardProps) {
   return (
-    <section className="group relative overflow-hidden rounded-[30px] border border-white/10 bg-slate-900/40 p-7 shadow-[0_18px_50px_rgba(2,6,23,0.5)] backdrop-blur-xl sm:p-8">
+    <section className="group relative h-full overflow-hidden rounded-[30px] border border-white/10 bg-slate-900/40 p-7 shadow-[0_18px_50px_rgba(2,6,23,0.5)] backdrop-blur-xl sm:p-8">
       <div
         className={`pointer-events-none absolute inset-x-8 top-0 h-24 rounded-full blur-3xl ${accentClassName}`}
       />
@@ -37,10 +36,6 @@ export function CapsuleCard({
         </div>
 
         <div className="mt-10 flex-1">{children}</div>
-
-        <div className="mt-10 border-t border-white/10 pt-5">
-          <p className="text-sm tracking-[0.14em] text-slate-300">{footerLabel}</p>
-        </div>
       </div>
     </section>
   );

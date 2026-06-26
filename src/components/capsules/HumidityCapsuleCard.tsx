@@ -29,8 +29,8 @@ export function HumidityCapsuleCard({ value }: HumidityCapsuleCardProps) {
     <CapsuleCard
       accentClassName="bg-teal-400/20"
       icon={<HumidityIcon />}
-      subtitle="Nem Sensoru"
-      title="HUMIDITY"
+      subtitle="Nem Sensörü"
+      title="NEM"
       footerLabel="Nem Durumu: Izleniyor"
     >
       <div className="space-y-8">
